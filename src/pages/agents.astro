@@ -1,0 +1,235 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+const agents = [
+  {
+    name: "扣子 - 智能客服",
+    description: "专为企业设计的智能客服解决方案，支持多轮对话、知识库管理和情感识别。",
+    source: "coze.cn",
+    status: "已上线",
+    color: "from-indigo-500 to-purple-500",
+    icon: "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z\"></path>",
+    features: ["多轮对话", "知识库管理", "情感识别", "自动回复"],
+    category: "客服"
+  },
+  {
+    name: "DeepSeek 思考者",
+    description: "基于大模型的智能研究助手，擅长深度思考、多维度分析和学术研究支持。",
+    source: "DeepSeek",
+    status: "已上线",
+    color: "from-blue-500 to-cyan-500",
+    icon: "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z\"></path>",
+    features: ["深度思考", "多维度分析", "学术研究", "文献综述"],
+    category: "研究"
+  },
+  {
+    name: "文心一言 创作助手",
+    description: "专业的内容创作助手，支持多种写作风格，提供从创意构思到成稿润色的全流程支持。",
+    source: "百度",
+    status: "已上线",
+    color: "from-amber-500 to-orange-500",
+    icon: "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z\"></path>",
+    features: ["内容创作", "多风格写作", "创意构思", "润色修改"],
+    category: "创作"
+  },
+  {
+    name: "通义千问 知识助手",
+    description: "阿里巴巴推出的大语言模型，擅长知识问答、逻辑推理和多语言翻译，适合教育和研究场景。",
+    source: "阿里巴巴",
+    status: "已上线",
+    color: "from-green-500 to-teal-500",
+    icon: "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253\"></path>",
+    features: ["知识问答", "逻辑推理", "多语言翻译", "教育辅助"],
+    category: "教育"
+  },
+  {
+    name: "讯飞星火 对话助手",
+    description: "科大讯飞推出的认知智能大模型，具备自然流畅的对话能力和丰富的知识储备。",
+    source: "科大讯飞",
+    status: "已上线",
+    color: "from-red-500 to-pink-500",
+    icon: "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z\"></path>",
+    features: ["自然对话", "知识问答", "情感交流", "语音识别"],
+    category: "对话"
+  },
+  {
+    name: "MiniMax 智谱清言",
+    description: "专注于中文理解和生成的大模型，具备优秀的文本理解和创作能力，适合内容生产和教育场景。",
+    source: "智谱AI",
+    status: "已上线",
+    color: "from-purple-500 to-indigo-500",
+    icon: "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z\"></path>",
+    features: ["中文理解", "文本创作", "知识问答", "内容生产"],
+    category: "创作"
+  },
+  {
+    name: "月之暗面 数据分析师",
+    description: "专业的数据分析智能体，擅长数据处理、可视化和洞察挖掘，为企业决策提供数据支持。",
+    source: "月之暗面AI",
+    status: "内测中",
+    color: "from-gray-700 to-gray-900",
+    icon: "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z\"></path><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z\"></path>",
+    features: ["数据处理", "可视化分析", "洞察挖掘", "预测模型"],
+    category: "数据"
+  },
+  {
+    name: "智谱 AI 编程助手",
+    description: "专为开发者设计的编程助手，支持多种编程语言，提供代码生成、调试和优化建议。",
+    source: "智谱AI",
+    status: "已上线",
+    color: "from-blue-600 to-blue-800",
+    icon: "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5\" />",
+    features: ["代码生成", "代码调试", "性能优化", "多语言支持"],
+    category: "开发"
+  },
+  {
+    name: "百川 金融分析师",
+    description: "专注于金融领域的智能体，提供市场分析、投资建议和风险评估，助力金融决策。",
+    source: "百川智能",
+    status: "内测中",
+    color: "from-green-600 to-emerald-600",
+    icon: "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z\" />",
+    features: ["市场分析", "投资建议", "风险评估", "财务规划"],
+    category: "金融"
+  }
+];
+
+const categories = [...new Set(agents.map(agent => agent.category))];
+---
+
+<Layout title="智能体展示 - 雁鸣AI研习社">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
+    <div class="container mx-auto px-4 md:px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <a href="/" class="flex items-center space-x-2">
+            <div class="w-10 h-10">
+              <svg viewBox="0 0 40 40" class="w-full h-full">
+                <path d="M20 5C11.729 5 5 11.729 5 20C5 28.271 11.729 35 20 35C28.271 35 35 28.271 35 20C35 11.729 28.271 5 20 5ZM20 10C22.757 10 25 12.243 25 15C25 17.757 22.757 20 20 20C17.243 20 15 17.757 15 15C15 12.243 17.243 10 20 10ZM20 31C16.875 31 14.025 29.535 12.175 27.2C12.23 23.6 19.4 21.6 20 21.6C20.6 21.6 27.77 23.6 27.825 27.2C25.975 29.535 23.125 31 20 31Z" fill="#5E5ADB"/>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-lg font-semibold">雁鸣AI研习社</h1>
+              <p class="text-xs text-gray-500">AI Agent Innovation Hub</p>
+            </div>
+          </a>
+        </div>
+        
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/agents" class="text-sm text-indigo-600 font-medium">智能体展示</a>
+          <a href="/#tutorials" class="text-sm hover:text-indigo-600 transition-colors">应用教程</a>
+          <a href="/#resources" class="text-sm hover:text-indigo-600 transition-colors">资源分享</a>
+          <a href="/#blog" class="text-sm hover:text-indigo-600 transition-colors">博客文章</a>
+          <a href="/#contact" class="text-sm hover:text-indigo-600 transition-colors">联系我们</a>
+        </nav>
+        
+        <button class="md:hidden" id="mobile-menu-button">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="px-4 py-3 space-y-2">
+        <a href="/agents" class="block text-indigo-600 font-medium">智能体展示</a>
+        <a href="/#tutorials" class="block hover:text-indigo-600 transition-colors">应用教程</a>
+        <a href="/#resources" class="block hover:text-indigo-600 transition-colors">资源分享</a>
+        <a href="/#blog" class="block hover:text-indigo-600 transition-colors">博客文章</a>
+        <a href="/#contact" class="block hover:text-indigo-600 transition-colors">联系我们</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 md:px-6 pt-28 pb-16">
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold mb-2">AI 智能体展示</h1>
+      <p class="text-gray-600 max-w-3xl">探索当前最前沿的AI智能体，了解它们的功能特点和应用场景，助力您的工作与学习。</p>
+    </div>
+    
+    <!-- Filters -->
+    <div class="mb-8">
+      <div class="flex flex-wrap gap-2">
+        <button class="filter-btn active px-4 py-2 rounded-full text-sm bg-indigo-100 text-indigo-700 hover:bg-indigo-200 transition-colors" data-category="all">全部</button>
+        {categories.map(category => (
+          <button class="filter-btn px-4 py-2 rounded-full text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors" data-category={category}>{category}</button>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Agent Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {agents.map(agent => (
+        <a href={`/agent/${agent.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`} class="agent-card border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow" data-category={agent.category}>
+          <div class={`bg-gradient-to-r ${agent.color} p-6 text-white`}>
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="text-xl font-semibold mb-1">{agent.name}</h3>
+                <p class="text-sm opacity-90">{agent.source}</p>
+              </div>
+              <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <Fragment set:html={agent.icon} />
+                </svg>
+              </div>
+            </div>
+            <div class="mt-4">
+              <span class="inline-block px-2 py-1 rounded-full text-xs bg-white/20">{agent.status}</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-600 mb-4">{agent.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {agent.features.map(feature => (
+                <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">{feature}</span>
+              ))}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+
+  <Footer />
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+    
+    // Category filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const agentCards = document.querySelectorAll('.agent-card');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active', 'bg-indigo-100', 'text-indigo-700'));
+        filterButtons.forEach(btn => btn.classList.add('bg-gray-100', 'text-gray-700'));
+        button.classList.add('active', 'bg-indigo-100', 'text-indigo-700');
+        button.classList.remove('bg-gray-100', 'text-gray-700');
+        
+        const category = button.getAttribute('data-category');
+        
+        // Filter cards
+        agentCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>

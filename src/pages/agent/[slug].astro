@@ -1,0 +1,224 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import { agents } from '../../data/agents';
+
+export async function getStaticPaths() {
+  return agents.map(agent => ({
+    params: { slug: agent.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') },
+    props: { agent },
+  }));
+}
+
+const { agent } = Astro.props;
+
+// 模拟更多详细信息
+const detailedInfo = {
+  longDescription: `${agent.description} 这是一个更详细的描述，介绍该智能体的核心技术、应用场景和主要优势。这里可以包含更多关于该智能体的背景信息、开发历程以及技术原理等内容。`,
+  useCases: [
+    {
+      title: '场景一：日常助手',
+      description: '在日常工作和学习中，如何利用该智能体提高效率和解决问题。',
+      steps: ['步骤1：明确需求', '步骤2：选择合适的指令方式', '步骤3：优化提示词获取更好结果']
+    },
+    {
+      title: '场景二：专业应用',
+      description: '在专业领域中，如何充分发挥该智能体的特长，解决复杂问题。',
+      steps: ['步骤1：准备专业背景知识', '步骤2：构建结构化的提问', '步骤3：迭代优化结果']
+    },
+    {
+      title: '场景三：创新探索',
+      description: '如何利用该智能体进行创新思考和探索未知领域。',
+      steps: ['步骤1：设定创新目标', '步骤2：引导发散思维', '步骤3：收敛并实现创意']
+    }
+  ],
+  tutorials: [
+    {
+      title: '入门教程：基础使用方法',
+      content: '介绍如何开始使用该智能体，包括注册、配置和基本操作等内容。',
+      difficulty: '初级'
+    },
+    {
+      title: '进阶教程：提示词工程',
+      content: '学习如何设计高效的提示词，让智能体产出更符合预期的结果。',
+      difficulty: '中级'
+    },
+    {
+      title: '高级教程：API集成开发',
+      content: '了解如何将该智能体集成到自己的应用程序中，实现自动化和定制化功能。',
+      difficulty: '高级'
+    }
+  ],
+  faqs: [
+    {
+      question: '如何获取使用资格？',
+      answer: '目前可以通过官方网站申请试用资格，或者通过合作伙伴渠道获取邀请码。'
+    },
+    {
+      question: '是否支持私有化部署？',
+      answer: '企业版支持私有化部署，可以联系官方销售团队了解详情。'
+    },
+    {
+      question: '如何提高输出质量？',
+      answer: '可以通过优化提示词、提供更多上下文信息、使用多轮对话等方式提高输出质量。'
+    },
+    {
+      question: '是否有使用限制？',
+      answer: '不同版本有不同的使用限制，包括每日请求次数、模型大小等，详情请参考官方文档。'
+    }
+  ],
+  reviews: [
+    {
+      user: '张先生',
+      role: '产品经理',
+      content: '这个智能体极大地提高了我的工作效率，特别是在需要快速生成内容和分析数据的场景。',
+      rating: 5
+    },
+    {
+      user: '李女士',
+      role: '研究员',
+      content: '作为研究工具非常有用，能够帮助我快速梳理文献和生成研究思路，节省了大量时间。',
+      rating: 4
+    },
+    {
+      user: '王同学',
+      role: '大学生',
+      content: '学习的好帮手，不仅能解答问题，还能提供多角度的思考方式，帮助我更深入理解知识点。',
+      rating: 5
+    }
+  ]
+};
+---
+
+<Layout title={`${agent.name} - 详细介绍 - 雁鸣AI研习社`}>
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
+    <div class="container mx-auto px-4 md:px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <a href="/" class="flex items-center space-x-2">
+            <div class="w-10 h-10">
+              <svg viewBox="0 0 40 40" class="w-full h-full">
+                <path d="M20 5C11.729 5 5 11.729 5 20C5 28.271 11.729 35 20 35C28.271 35 35 28.271 35 20C35 11.729 28.271 5 20 5ZM20 10C22.757 10 25 12.243 25 15C25 17.757 22.757 20 20 20C17.243 20 15 17.757 15 15C15 12.243 17.243 10 20 10ZM20 31C16.875 31 14.025 29.535 12.175 27.2C12.23 23.6 19.4 21.6 20 21.6C20.6 21.6 27.77 23.6 27.825 27.2C25.975 29.535 23.125 31 20 31Z" fill="#5E5ADB"/>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-lg font-semibold">雁鸣AI研习社</h1>
+              <p class="text-xs text-gray-500">AI Agent Innovation Hub</p>
+            </div>
+          </a>
+        </div>
+        
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/agents" class="text-sm text-indigo-600 font-medium">智能体展示</a>
+          <a href="/#tutorials" class="text-sm hover:text-indigo-600 transition-colors">应用教程</a>
+          <a href="/#resources" class="text-sm hover:text-indigo-600 transition-colors">资源分享</a>
+          <a href="/#blog" class="text-sm hover:text-indigo-600 transition-colors">博客文章</a>
+          <a href="/#contact" class="text-sm hover:text-indigo-600 transition-colors">联系我们</a>
+        </nav>
+        
+        <button class="md:hidden" id="mobile-menu-button">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="px-4 py-3 space-y-2">
+        <a href="/agents" class="block text-indigo-600 font-medium">智能体展示</a>
+        <a href="/#tutorials" class="block hover:text-indigo-600 transition-colors">应用教程</a>
+        <a href="/#resources" class="block hover:text-indigo-600 transition-colors">资源分享</a>
+        <a href="/#blog" class="block hover:text-indigo-600 transition-colors">博客文章</a>
+        <a href="/#contact" class="block hover:text-indigo-600 transition-colors">联系我们</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="pt-28 pb-12">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="flex flex-col md:flex-row gap-8 items-center">
+        <!-- Left: Agent Info -->
+        <div class="w-full md:w-1/2">
+          <div class="flex items-center gap-2 mb-4">
+            <a href="/agents" class="text-sm text-gray-500 hover:text-indigo-600 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              返回智能体列表
+            </a>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">{agent.name}</h1>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-block px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-700">{agent.category}</span>
+            <span class="inline-block px-2 py-1 rounded-full text-xs bg-green-50 text-green-600">{agent.status}</span>
+            <span class="text-sm text-gray-500">来自: {agent.source}</span>
+          </div>
+          <p class="text-gray-600 mb-6">{detailedInfo.longDescription}</p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            {agent.features.map(feature => (
+              <span class="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700">{feature}</span>
+            ))}
+          </div>
+          <div class="flex gap-4">
+            <a href="#" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+              立即体验
+            </a>
+            <a href="#tutorials" class="px-6 py-3 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+              查看教程
+            </a>
+          </div>
+        </div>
+        
+        <!-- Right: Agent Image/Icon -->
+        <div class="w-full md:w-1/2">
+          <div class={`bg-gradient-to-r ${agent.color} p-12 rounded-xl flex items-center justify-center`}>
+            <div class="w-32 h-32 rounded-full bg-white/20 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <Fragment set:html={agent.icon} />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 md:px-6">
+      <h2 class="text-2xl font-bold mb-8 text-center">核心功能与特点</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {agent.features.map((feature, index) => (
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mb-4">
+              <span class="text-xl font-semibold text-indigo-600">{index + 1}</span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">{feature}</h3>
+            <p class="text-gray-600">
+              {feature}的详细说明，介绍该功能的具体实现方式、技术原理和应用价值。
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- Use Cases Section -->
+  <section class="py-12" id="use-cases">
+    <div class="container mx-auto px-4 md:px-6">
+      <h2 class="text-2xl font-bold mb-8 text-center">应用场景</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {detailedInfo.useCases.map((useCase, index) => (
+          <div class="border border-gray-200 rounded-xl overflow-hidden">
+            <div class="h-3 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+            <div class="p-6">
+              <h3 class="text-lg font-semibold mb-3">{useCase.title}</h3>
+              <p class="text-gray-600 mb-4">{useCase.description}</p>
+              <div class="space-y-2">
+                {useCase.steps.map((step, stepIndex) => (
+                  <div class="flex items-start">
+                    <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center mr-2

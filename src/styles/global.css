@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义样式 */
+:root {
+  --primary: #5E5ADB;
+  --primary-light: #DEDCFF;
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B7280;
+  --background: #FFFFFF;
+  --background-alt: #F9FAFB;
+  --border: #E5E7EB;
+}
+
+/* 自定义字体设置 */
+.font-geist-mono {
+  font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+}

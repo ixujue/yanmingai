@@ -1,210 +1,197 @@
 ---
-import astroLogo from '../assets/astro.svg';
-import background from '../assets/background.svg';
+import Agents from './Agents.astro';
+import Tutorials from './Tutorials.astro';
+import Resources from './Resources.astro';
+import Blog from './Blog.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
 ---
 
-<div id="container">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main>
-		<section id="hero">
-			<a href="https://astro.build"
-				><img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" /></a
-			>
-			<h1>
-				To get started, open the <code><pre>src/pages</pre></code> directory in your project.
-			</h1>
-			<section id="links">
-				<a class="button" href="https://docs.astro.build">Read our docs</a>
-				<a href="https://astro.build/chat"
-					>Join our Discord <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36"
-						><path
-							fill="currentColor"
-							d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"
-						></path></svg
-					>
-				</a>
-			</section>
-		</section>
-	</main>
+<div class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
+    <div class="container mx-auto px-4 md:px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <div class="w-10 h-10">
+            <svg viewBox="0 0 40 40" class="w-full h-full">
+              <path d="M20 5C11.729 5 5 11.729 5 20C5 28.271 11.729 35 20 35C28.271 35 35 28.271 35 20C35 11.729 28.271 5 20 5ZM20 10C22.757 10 25 12.243 25 15C25 17.757 22.757 20 20 20C17.243 20 15 17.757 15 15C15 12.243 17.243 10 20 10ZM20 31C16.875 31 14.025 29.535 12.175 27.2C12.23 23.6 19.4 21.6 20 21.6C20.6 21.6 27.77 23.6 27.825 27.2C25.975 29.535 23.125 31 20 31Z" fill="#5E5ADB"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-lg font-semibold">雁鸣AI研习社</h1>
+            <p class="text-xs text-gray-500">AI Agent Innovation Hub</p>
+          </div>
+        </div>
+        
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/agents" class="text-sm hover:text-indigo-600 transition-colors">智能体展示</a>
+          <a href="#tutorials" class="text-sm hover:text-indigo-600 transition-colors">应用教程</a>
+          <a href="#resources" class="text-sm hover:text-indigo-600 transition-colors">资源分享</a>
+          <a href="#blog" class="text-sm hover:text-indigo-600 transition-colors">博客文章</a>
+          <a href="#contact" class="text-sm hover:text-indigo-600 transition-colors">联系我们</a>
+        </nav>
+        
+        <div class="md:hidden flex items-center">
+          <button id="menuToggle" class="p-2">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100">
+      <div class="container mx-auto px-4 py-4">
+        <nav class="flex flex-col space-y-4">
+          <a href="/agents" class="py-2 text-sm hover:text-indigo-600 transition-colors">智能体展示</a>
+          <a href="#tutorials" class="py-2 text-sm hover:text-indigo-600 transition-colors">应用教程</a>
+          <a href="#resources" class="py-2 text-sm hover:text-indigo-600 transition-colors">资源分享</a>
+          <a href="#blog" class="py-2 text-sm hover:text-indigo-600 transition-colors">博客文章</a>
+          <a href="#contact" class="py-2 text-sm hover:text-indigo-600 transition-colors">联系我们</a>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-	<a href="https://astro.build/blog/astro-5/" id="news" class="box">
-		<svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"
-			><path
-				d="M24.667 12c1.333 1.414 2 3.192 2 5.334 0 4.62-4.934 5.7-7.334 12C18.444 28.567 18 27.456 18 26c0-4.642 6.667-7.053 6.667-14Zm-5.334-5.333c1.6 1.65 2.4 3.43 2.4 5.333 0 6.602-8.06 7.59-6.4 17.334C13.111 27.787 12 25.564 12 22.666c0-4.434 7.333-8 7.333-16Zm-6-5.333C15.111 3.555 16 5.556 16 7.333c0 8.333-11.333 10.962-5.333 22-3.488-.774-6-4-6-8 0-8.667 8.666-10 8.666-20Z"
-				fill="#111827"></path></svg
-		>
-		<h2>What's New in Astro 5.0?</h2>
-		<p>
-			From content layers to server islands, click to learn more about the new features and
-			improvements in Astro 5.0
-		</p>
-	</a>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-gray-50 z-[-1]"></div>
+    <div class="absolute top-0 left-0 right-0 h-64 bg-hero-pattern opacity-5 z-[-1]"></div>
+    
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <div class="inline-block px-3 py-1 text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full">
+            中国智能体研究与应用社区
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            解锁<span class="text-indigo-600">AI智能体</span>的无限可能
+          </h1>
+          <p class="text-gray-600 text-lg">
+            雁鸣AI研习社致力于智能体技术的探索、创新与分享，为AI开发者、运营团队和AI爱好者提供一站式学习平台。
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/agents" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+              探索智能体
+              <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+            </a>
+            <a href="#tutorials" class="inline-flex items-center px-6 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+              学习教程
+            </a>
+          </div>
+        </div>
+        
+        <div class="relative">
+          <div class="absolute -inset-4 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-2xl blur-xl opacity-30"></div>
+          <div class="relative bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+            <div class="flex items-center space-x-4 mb-4">
+              <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
+                <svg viewBox="0 0 24 24" class="w-6 h-6 text-white" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-medium">扣子 - coze.cn</h3>
+                <p class="text-sm text-gray-500">专业的智能问答与客服机器人</p>
+              </div>
+            </div>
+            <div class="space-y-4 mb-6">
+              <div class="p-4 bg-gray-50 rounded-lg">
+                <div class="flex items-start space-x-3">
+                  <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="user" class="w-4 h-4 text-indigo-600"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-700">如何使用扣子智能体来提高我的工作效率？</p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 bg-indigo-50 rounded-lg">
+                <div class="flex items-start space-x-3">
+                  <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm text-gray-700">您可以通过以下方式使用扣子智能体提高工作效率：</p>
+                    <ul class="mt-2 space-y-1 text-xs text-gray-600 list-disc pl-4">
+                      <li>自动回复客户常见问题</li>
+                      <li>协助整理会议记录和行动项</li>
+                      <li>快速检索和汇总文档内容</li>
+                      <li>提供数据分析和可视化建议</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-gray-500">功能: 智能问答、知识库管理、多轮对话</span>
+              <a href="#" class="text-xs text-indigo-600 hover:underline">了解更多</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 智能体展示部分 -->
+  <Agents />
+  
+  <!-- 应用教程部分 -->
+  <Tutorials />
+  
+  <!-- 资源分享部分 -->
+  <Resources />
+  
+  <!-- 博客文章部分 -->
+  <Blog />
+  
+  <!-- 联系我们部分 -->
+  <Contact />
+  
+  <!-- 页脚部分 -->
+  <Footer />
+  
+  <script>
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    });
+  </script>
 </div>
 
-<style>
-	#background {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-		filter: blur(100px);
-	}
+<script>
+  // 移动端菜单交互
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-	#container {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		height: 100%;
-	}
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
 
-	main {
-		height: 100%;
-		display: flex;
-		justify-content: center;
-	}
+      // 点击菜单项时关闭菜单
+      const menuItems = mobileMenu.querySelectorAll('a');
+      menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
 
-	#hero {
-		display: flex;
-		align-items: start;
-		flex-direction: column;
-		justify-content: center;
-		padding: 16px;
-	}
-
-	h1 {
-		font-size: 22px;
-		margin-top: 0.25em;
-	}
-
-	#links {
-		display: flex;
-		gap: 16px;
-	}
-
-	#links a {
-		display: flex;
-		align-items: center;
-		padding: 10px 12px;
-		color: #111827;
-		text-decoration: none;
-		transition: color 0.2s;
-	}
-
-	#links a:hover {
-		color: rgb(78, 80, 86);
-	}
-
-	#links a svg {
-		height: 1em;
-		margin-left: 8px;
-	}
-
-	#links a.button {
-		color: white;
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		box-shadow:
-			inset 0 0 0 1px rgba(255, 255, 255, 0.12),
-			inset 0 -2px 0 rgba(0, 0, 0, 0.24);
-		border-radius: 10px;
-	}
-
-	#links a.button:hover {
-		color: rgb(230, 230, 230);
-		box-shadow: none;
-	}
-
-	pre {
-		font-family:
-			ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono',
-			monospace;
-		font-weight: normal;
-		background: linear-gradient(14deg, #d83333 0%, #f041ff 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		margin: 0;
-	}
-
-	h2 {
-		margin: 0 0 1em;
-		font-weight: normal;
-		color: #111827;
-		font-size: 20px;
-	}
-
-	p {
-		color: #4b5563;
-		font-size: 16px;
-		line-height: 24px;
-		letter-spacing: -0.006em;
-		margin: 0;
-	}
-
-	code {
-		display: inline-block;
-		background:
-			linear-gradient(66.77deg, #f3cddd 0%, #f5cee7 100%) padding-box,
-			linear-gradient(155deg, #d83333 0%, #f041ff 18%, #f5cee7 45%) border-box;
-		border-radius: 8px;
-		border: 1px solid transparent;
-		padding: 6px 8px;
-	}
-
-	.box {
-		padding: 16px;
-		background: rgba(255, 255, 255, 1);
-		border-radius: 16px;
-		border: 1px solid white;
-	}
-
-	#news {
-		position: absolute;
-		bottom: 16px;
-		right: 16px;
-		max-width: 300px;
-		text-decoration: none;
-		transition: background 0.2s;
-		backdrop-filter: blur(50px);
-	}
-
-	#news:hover {
-		background: rgba(255, 255, 255, 0.55);
-	}
-
-	@media screen and (max-height: 368px) {
-		#news {
-			display: none;
-		}
-	}
-
-	@media screen and (max-width: 768px) {
-		#container {
-			display: flex;
-			flex-direction: column;
-		}
-
-		#hero {
-			display: block;
-			padding-top: 10%;
-		}
-
-		#links {
-			flex-wrap: wrap;
-		}
-
-		#links a.button {
-			padding: 14px 18px;
-		}
-
-		#news {
-			right: 16px;
-			left: 16px;
-			bottom: 2.5rem;
-			max-width: 100%;
-		}
-
-		h1 {
-			line-height: 1.5;
-		}
-	}
-</style>
+      // 点击页面其他区域时关闭菜单
+      document.addEventListener('click', (event) => {
+        if (!menuToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+    }
+  });
+</script>
