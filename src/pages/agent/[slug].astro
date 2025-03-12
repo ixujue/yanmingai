@@ -4,25 +4,10 @@ import Footer from '../../components/Footer.astro';
 import { agents } from '../../data/agents';
 
 export async function getStaticPaths() {
-  return agents.map(agent => {
-    // 确保生成有效的slug，避免空字符串
-    let slug = agent.name.toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9-]/g, '')
-      .replace(/[，。！？、]/g, '');
-    
-    // 如果slug为空，使用一个默认值
-    if (!slug || slug.length === 0) {
-      slug = `agent-${Date.now()}`;
-    }
-    
-    console.log(`生成的slug: ${slug} 对应的agent: ${agent.name}`);
-    
-    return {
-      params: { slug },
-      props: { agent }
-    };
-  });
+  return agents.map(agent => ({
+    params: { slug: agent.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').replace(/[，。！？、]/g, '') },
+    props: { agent },
+  }));
 }
 
 const { agent } = Astro.props;

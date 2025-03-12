@@ -1,4 +1,8 @@
 ---
+import { tutorials } from '../data/tutorials';
+
+// 获取前3个教程用于展示
+const featuredTutorials = tutorials.slice(0, 3);
 ---
 
 <section id="tutorials" class="py-20 bg-gray-50">
@@ -14,79 +18,63 @@
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- Application Tutorials -->
+      <!-- 精选教程 -->
       <div class="bg-white p-6 rounded-xl border border-gray-100">
         <div class="flex items-center space-x-2 mb-6">
           <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
             <i data-lucide="book-open" class="w-5 h-5 text-indigo-600"></i>
           </div>
-          <h3 class="font-semibold text-xl">应用教程</h3>
+          <h3 class="font-semibold text-xl">精选教程</h3>
         </div>
         
         <div class="space-y-4">
-          <div class="flex items-start space-x-4">
-            <span class="text-3xl font-light text-indigo-600">01</span>
-            <div>
-              <h4 class="font-medium mb-1">智能体基础入门</h4>
-              <p class="text-sm text-gray-600 mb-2">了解什么是AI智能体，以及它们如何改变我们的工作和生活方式。</p>
-              <a href="#" class="text-xs text-indigo-600 hover:underline">立即学习 →</a>
+          {featuredTutorials.map((tutorial, index) => (
+            <div class="flex items-start space-x-4">
+              <span class="text-3xl font-light text-indigo-600">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h4 class="font-medium mb-1">{tutorial.title}</h4>
+                <p class="text-sm text-gray-600 mb-2">{tutorial.description}</p>
+                <a href={`/tutorial/${tutorial.id}`} class="text-xs text-indigo-600 hover:underline">立即学习 →</a>
+              </div>
             </div>
-          </div>
-          
-          <div class="flex items-start space-x-4">
-            <span class="text-3xl font-light text-indigo-600">02</span>
-            <div>
-              <h4 class="font-medium mb-1">扣子智能体实战指南</h4>
-              <p class="text-sm text-gray-600 mb-2">掌握扣子智能体的核心功能，从配置到日常使用的全面教程。</p>
-              <a href="#" class="text-xs text-indigo-600 hover:underline">立即学习 →</a>
-            </div>
-          </div>
-          
-          <div class="flex items-start space-x-4">
-            <span class="text-3xl font-light text-indigo-600">03</span>
-            <div>
-              <h4 class="font-medium mb-1">企业级智能体应用策略</h4>
-              <p class="text-sm text-gray-600 mb-2">探索如何在企业环境中最大化智能体价值，提升团队效率和客户满意度。</p>
-              <a href="#" class="text-xs text-indigo-600 hover:underline">立即学习 →</a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       
-      <!-- Creation Tutorials -->
+      <!-- 教程分类 -->
       <div class="bg-white p-6 rounded-xl border border-gray-100">
         <div class="flex items-center space-x-2 mb-6">
           <div class="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-            <i data-lucide="code" class="w-5 h-5 text-indigo-600"></i>
+            <i data-lucide="layers" class="w-5 h-5 text-indigo-600"></i>
           </div>
-          <h3 class="font-semibold text-xl">创建教程</h3>
+          <h3 class="font-semibold text-xl">教程分类</h3>
         </div>
         
         <div class="space-y-4">
           <div class="flex items-start space-x-4">
             <span class="text-3xl font-light text-indigo-600">01</span>
             <div>
-              <h4 class="font-medium mb-1">从零开始构建智能体</h4>
-              <p class="text-sm text-gray-600 mb-2">学习如何使用coze.cn平台创建您的第一个自定义智能体。</p>
-              <a href="#" class="text-xs text-indigo-600 hover:underline">立即学习 →</a>
+              <h4 class="font-medium mb-1">提示词工程</h4>
+              <p class="text-sm text-gray-600 mb-2">掌握AI提示词编写技巧，提升模型输出质量。</p>
+              <a href="/tutorials?category=提示词工程" class="text-xs text-indigo-600 hover:underline">查看教程 →</a>
             </div>
           </div>
           
           <div class="flex items-start space-x-4">
             <span class="text-3xl font-light text-indigo-600">02</span>
             <div>
-              <h4 class="font-medium mb-1">知识库搭建与优化</h4>
-              <p class="text-sm text-gray-600 mb-2">深入了解如何为智能体构建高质量的知识库，提升回答准确性。</p>
-              <a href="#" class="text-xs text-indigo-600 hover:underline">立即学习 →</a>
+              <h4 class="font-medium mb-1">AI创意</h4>
+              <p class="text-sm text-gray-600 mb-2">探索AI艺术创作，释放无限创意可能。</p>
+              <a href="/tutorials?category=AI创意" class="text-xs text-indigo-600 hover:underline">查看教程 →</a>
             </div>
           </div>
           
           <div class="flex items-start space-x-4">
             <span class="text-3xl font-light text-indigo-600">03</span>
             <div>
-              <h4 class="font-medium mb-1">智能体性能评估与优化</h4>
-              <p class="text-sm text-gray-600 mb-2">掌握如何评估和持续优化您的智能体，提升用户交互体验。</p>
-              <a href="#" class="text-xs text-indigo-600 hover:underline">立即学习 →</a>
+              <h4 class="font-medium mb-1">智能体开发</h4>
+              <p class="text-sm text-gray-600 mb-2">从零开始构建和优化您的AI智能体。</p>
+              <a href="/tutorials?category=智能体开发" class="text-xs text-indigo-600 hover:underline">查看教程 →</a>
             </div>
           </div>
         </div>
@@ -94,9 +82,11 @@
     </div>
     
     <div class="mt-12 text-center">
-      <a href="#" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+      <a href="/tutorials" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
         浏览全部教程
-        <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
       </a>
     </div>
   </div>
